@@ -112,9 +112,11 @@ class RouteTree {
     if (usePath.startsWith("/")) {
       usePath = path.substring(1);
     }
-    List<String> components = usePath.split("/");
-    if (path == Navigator.defaultRouteName) {
-      components = ["/"];
+
+    var components = usePath.split("/");
+
+    if (RegExp(r"(\/$|\/\?.*)").hasMatch(path)) {
+      components = [path];
     }
 
     Map<RouteTreeNode, RouteTreeNodeMatch> nodeMatches =
